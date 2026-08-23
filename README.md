@@ -110,17 +110,6 @@ YT-AZS/
 
 ---
 
-## 🚀 Publicare pe GitHub & GitHub Desktop
-
-1. Deschideți **GitHub Desktop**.
-2. Mergeți la **File** -> **Add Local Repository...** (sau apăsați `Ctrl+O`).
-3. Selectați folderul proiectului `YT-AZS-12.0`.
-4. Dacă GitHub Desktop vă întreabă dacă doriți să inițializați un depozit, confirmați.
-5. Apăsați pe **Publish repository** pentru a crea un nou repository pe contul dumneavoastră GitHub (ex: `YT-AZS-v2`).
-6. La crearea unui Tag/Release (ex: `v12.0`), GitHub Actions va compila automat executabilele pentru Windows și Linux!
-
----
-
 ## 📄 Credite & Drepturi de Autor
 - **Autor**: David Marica - AZS Gherla
 - **Versiune**: 12.0 (August 2026)
