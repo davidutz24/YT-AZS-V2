@@ -1,0 +1,14 @@
+# YT AZS V12.0 - Multi-Source Downloader Requirements
+# pip install -r requirements_ytazs.txt
+
+customtkinter>=5.2.0
+yt-dlp>=2024.1.1
+imageio-ffmpeg>=0.4.9
+Pillow>=10.0.0
+mutagen>=1.47.0
+
+# Optional pentru build executabile (.exe / binary):
+pyinstaller>=6.3.0
+
+# Pentru Windows Setup Installer:
+# Inno Setup: https://jrsoftware.org/isdl.php

@@ -1,0 +1,36 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+build/
+dist/
+downloads/
+*.egg-info/
+*.egg
+*.spec
+
+# Installer output
+installer/
+*.deb
+*.rpm
+*.AppImage
+
+# Virtual environments
+venv/
+.venv/
+env/
+ENV/
+
+# User & Cache configs
+.yt_azs_config.json
+.yt_azs_cache/
+*.log
+
+# OS generated files
+.DS_Store
+Thumbs.db
