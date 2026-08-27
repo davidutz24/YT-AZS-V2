@@ -258,9 +258,8 @@ class YtAzsApp(BaseWindow):
         self._bind_config_autosave()
         self.protocol("WM_DELETE_WINDOW", self._on_close)
         
-        # Închide dropdown-urile flotante DOAR când fereastra se deplasează efectiv pe ecran sau la click afară
+        # Închide dropdown-urile flotante DOAR când fereastra se deplasează efectiv pe ecran
         self.bind("<Configure>", self._on_window_configure)
-        self.bind_all("<Button-1>", self._on_global_click, add="+")
         
         self.after(self._ui_refresh_ms, self._drain_ui_queue)
         self._startup_log()
@@ -531,17 +530,6 @@ class YtAzsApp(BaseWindow):
             if self._last_win_pos is not None and self._last_win_pos != cur_pos:
                 self._close_dropdowns()
             self._last_win_pos = cur_pos
-
-    def _on_global_click(self, event=None):
-        if event:
-            try:
-                w = self.winfo_containing(event.x_root, event.y_root)
-                for om in self._optmenus:
-                    if w == om or (hasattr(om, "_text_label") and w == om._text_label) or (hasattr(om, "_canvas") and w == om._canvas):
-                        return
-            except Exception:
-                pass
-        self._close_dropdowns()
 
     def _close_dropdowns(self, event=None):
         for om in self._optmenus:
