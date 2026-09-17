@@ -42,15 +42,15 @@ jobs:
       - name: Package Windows Binary Zip
         shell: pwsh
         run: |
-          Compress-Archive -Path dist/YT-AZS -DestinationPath YT-AZS-Windows-Portable-V12.0.zip
+          Compress-Archive -Path dist/YT-AZS -DestinationPath YT-AZS-Windows-Portable-V12.1.zip
 
       - name: Upload Windows Artifacts
         uses: actions/upload-artifact@v4
         with:
           name: Windows-Builds
           path: |
-            installer/YT-AZS-Setup-V12.0.exe
-            YT-AZS-Windows-Portable-V12.0.zip
+            installer/YT-AZS-Setup-V12.1.exe
+            YT-AZS-Windows-Portable-V12.1.zip
 
   build-linux:
     runs-on: ubuntu-latest
@@ -95,13 +95,13 @@ jobs:
             --collect-all "yt_dlp" \
             YT-AZS.py
           chmod +x dist/YT-AZS/YT-AZS
-          tar -czvf YT-AZS-Linux-V12.0.tar.gz -C dist YT-AZS
+          tar -czvf YT-AZS-Linux-V12.1.tar.gz -C dist YT-AZS
 
       - name: Upload Linux Artifact
         uses: actions/upload-artifact@v4
         with:
           name: Linux-Builds
-          path: YT-AZS-Linux-V12.0.tar.gz
+          path: YT-AZS-Linux-V12.1.tar.gz
 
   release:
     needs: [build-windows, build-linux]
@@ -125,10 +125,10 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           files: |
-            YT-AZS-Setup-V12.0.exe
-            YT-AZS-Windows-Portable-V12.0.zip
-            YT-AZS-Linux-V12.0.tar.gz
-          name: "YT AZS V12.0"
+            YT-AZS-Setup-V12.1.exe
+            YT-AZS-Windows-Portable-V12.1.zip
+            YT-AZS-Linux-V12.1.tar.gz
+          name: "YT AZS V12.1"
           draft: false
           prerelease: false
           generate_release_notes: true

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-YT-AZS V12.0 - Multi-Source Download Engines
+YT-AZS V12.1 - Multi-Source Download Engines
 Ordered sources:
   1. Auto (Fallback inteligent pe toate sursele)
   2. YT-DLP (Standard / Calitate Maximă)

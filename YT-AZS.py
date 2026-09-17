@@ -2,9 +2,9 @@
 # -*- coding: utf-8 -*-
 """
 =============================================================================
-  YT AZS  -  Version 12.0  (Cross-Platform: Windows & Linux)
+  YT AZS  -  Version 12.1  (Cross-Platform: Windows & Linux)
   Multi-Source Video & Audio Downloader with Modern GUI and Web Fallback
-  (c) 2026 David Marica - AZS Gherla
+  © 2026 Biserica Adventista Gherla
 =============================================================================
 """
 
@@ -100,7 +100,7 @@ import yt_dlp
 from download_engines import ENGINE_LIST, FFMPEG_PATH, get_engine_by_name
 
 CREATE_NO_WINDOW = subprocess.CREATE_NO_WINDOW if sys.platform == "win32" else 0
-VERSION = "12.0"
+VERSION = "12.1"
 
 # ── Format lists ─────────────────────────────────────────────────────────────
 VIDEO_FORMATS = [
@@ -292,7 +292,7 @@ class YtAzsApp(BaseWindow):
         if sys.platform == "win32":
             try:
                 import ctypes
-                ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID("DavidMarica.YTAZS.Downloader.12.0")
+                ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID("BisericaAdventistaGherla.YTAZS.Downloader.12.1")
             except Exception:
                 pass
             if ico:
@@ -1061,7 +1061,7 @@ class YtAzsApp(BaseWindow):
         self._reg(self.btn_cancel, "text_color", "muted")
 
         ctk.CTkLabel(
-            bar, text="© 2026 David Marica - AZS Gherla",
+            bar, text="© Biserica Adventista Gherla",
             text_color=C["border"], font=ctk.CTkFont(size=10)
         ).pack(side="right", pady=(12, 0))
 
@@ -1096,7 +1096,7 @@ class YtAzsApp(BaseWindow):
 
         ctk.CTkLabel(t_frame, text=f"YT AZS — V{VERSION}", font=ctk.CTkFont(size=18, weight="bold"), text_color=C["accent"]).pack(anchor="w")
         ctk.CTkLabel(t_frame, text="Multi-Source Video & Audio Downloader", font=ctk.CTkFont(size=12), text_color=C["text"]).pack(anchor="w")
-        ctk.CTkLabel(t_frame, text="© 2026 David Marica - AZS Gherla", font=ctk.CTkFont(size=11), text_color=C["muted"]).pack(anchor="w")
+        ctk.CTkLabel(t_frame, text="© Biserica Adventista Gherla", font=ctk.CTkFont(size=11), text_color=C["muted"]).pack(anchor="w")
 
         tabs = ctk.CTkTabview(dlg, fg_color=C["surface"], segmented_button_selected_color=C["accent_dim"],
                                segmented_button_unselected_color=C["surface2"], text_color=C["text"])
@@ -1151,7 +1151,7 @@ class YtAzsApp(BaseWindow):
             except Exception:
                 pass
         if not readme_text:
-            readme_text = f"YT-AZS Versiunea {VERSION}\nAutor: David Marica - AZS Gherla\n© 2026 Toate drepturile rezervate."
+            readme_text = f"YT-AZS Versiunea {VERSION}\n© Biserica Adventista Gherla\nToate drepturile rezervate."
 
         readme_box.insert("1.0", readme_text)
         readme_box.configure(state="disabled")

@@ -1,13 +1,13 @@
 [Setup]
 AppName=YT AZS
-AppVersion=12.0
+AppVersion=12.1
 AppId={{65A83D2B-0A45-4B52-9F58-2E548F6D9D1A}
-AppPublisher=David Marica - AZS Gherla
+AppPublisher=Biserica Adventista Gherla
 AppPublisherURL=https://www.azsgherla.ro
 DefaultDirName={autopf}\YT AZS
 DefaultGroupName=YT AZS
 OutputDir=installer
-OutputBaseFilename=YT-AZS-Setup-V12.0
+OutputBaseFilename=YT-AZS-Setup-V12.1
 Compression=lzma2/ultra64
 SolidCompression=yes
 WizardStyle=modern
@@ -33,4 +33,4 @@ Name: "{group}\Dezinstaleaza YT AZS"; Filename: "{uninstallexe}"
 Name: "{commondesktop}\YT AZS"; Filename: "{app}\YT-AZS.exe"; Tasks: desktopicon
 
 [Run]
-Filename: "{app}\YT-AZS.exe"; Description: "Porneste YT AZS V12"; Flags: nowait postinstall skipifsilent
+Filename: "{app}\YT-AZS.exe"; Description: "Porneste YT AZS V12.1"; Flags: nowait postinstall skipifsilent

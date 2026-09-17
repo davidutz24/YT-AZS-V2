@@ -2,7 +2,7 @@
 set "NO_PAUSE="
 if /I "%~1"=="nopause" set "NO_PAUSE=1"
 :: =============================================================================
-::  YT AZS V12.0  -  Windows EXE Builder (PyInstaller + Inno Setup)
+::  YT AZS V12.1  -  Windows EXE Builder (PyInstaller + Inno Setup)
 ::  Pune acest fisier in ACELASI folder cu:
 ::      YT-AZS.py
 ::      download_engines.py
@@ -16,7 +16,7 @@ if /I "%~1"=="nopause" set "NO_PAUSE=1"
 
 echo.
 echo  ==========================================
-echo   YT AZS V12.0  -  Windows EXE Builder
+echo   YT AZS V12.1  -  Windows EXE Builder
 echo  ==========================================
 echo.
 
@@ -136,14 +136,14 @@ set "DIST_DIR=%~dp0dist\YT-AZS"
 (
 echo [Setup]
 echo AppName=YT AZS
-echo AppVersion=12.0
+echo AppVersion=12.1
 echo AppId={{65A83D2B-0A45-4B52-9F58-2E548F6D9D1A}
-echo AppPublisher=David Marica - AZS Gherla
+echo AppPublisher=Biserica Adventista Gherla
 echo AppPublisherURL=https://www.azsgherla.ro
 echo DefaultDirName={autopf}\YT AZS
 echo DefaultGroupName=YT AZS
 echo OutputDir=%~dp0installer
-echo OutputBaseFilename=YT-AZS-Setup-V12.0
+echo OutputBaseFilename=YT-AZS-Setup-V12.1
 echo Compression=lzma2/ultra64
 echo SolidCompression=yes
 echo WizardStyle=modern
@@ -169,7 +169,7 @@ echo Name: "{group}\Dezinstaleaza YT AZS"; Filename: "{uninstallexe}"
 echo Name: "{commondesktop}\YT AZS"; Filename: "{app}\YT-AZS.exe"; Tasks: desktopicon
 echo.
 echo [Run]
-echo Filename: "{app}\YT-AZS.exe"; Description: "Porneste YT AZS V12"; Flags: nowait postinstall skipifsilent
+echo Filename: "{app}\YT-AZS.exe"; Description: "Porneste YT AZS V12.1"; Flags: nowait postinstall skipifsilent
 ) > setup_ytazs.iss
 
 echo  [OK] setup_ytazs.iss generat.
@@ -187,7 +187,7 @@ echo.
 echo  3. Apasa Ctrl+F9 sau Build - Compile
 echo.
 echo  4. Installer-ul final va fi in:
-echo     installer\YT-AZS-Setup-V12.0.exe
+echo     installer\YT-AZS-Setup-V12.1.exe
 echo.
 echo  Acesta este un .exe installer adevarat cu:
 echo   - Start Menu shortcut

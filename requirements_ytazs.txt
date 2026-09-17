@@ -1,4 +1,4 @@
-# YT AZS V12.0 - Multi-Source Downloader Requirements
+# YT AZS V12.1 - Multi-Source Downloader Requirements
 # pip install -r requirements_ytazs.txt
 
 customtkinter>=5.2.0

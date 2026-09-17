@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # =============================================================================
-#  YT AZS V12.0  -  Linux Binary Builder (PyInstaller)
+#  YT AZS V12.1  -  Linux Binary Builder (PyInstaller)
 # =============================================================================
 set -e
 
@@ -9,7 +9,7 @@ cd "$DIR"
 
 echo ""
 echo "=========================================="
-echo "  YT AZS V12.0  -  Linux Binary Builder"
+echo "  YT AZS V12.1  -  Linux Binary Builder"
 echo "=========================================="
 echo ""
 

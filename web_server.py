@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-YT-AZS V12.0 - Built-in Web Browser Server Mode
+YT-AZS V12.1 - Built-in Web Browser Server Mode
 Zero-dependency HTTP server providing full web-based video downloader UI.
 """
 
@@ -106,7 +106,7 @@ HTML_PAGE = """<!DOCTYPE html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YT AZS V12.0 - Web Browser Mode</title>
+    <title>YT AZS V12.1 - Web Browser Mode</title>
     <style>
         :root {
             --bg: #1A1A1A;
@@ -211,7 +211,7 @@ HTML_PAGE = """<!DOCTYPE html>
     <header>
         <div class="brand">
             <div>
-                <h1>YT AZS V12.0</h1>
+                <h1>YT AZS V12.1</h1>
                 <span>Multi-Source Video Downloader (Web Browser Mode)</span>
             </div>
         </div>
@@ -321,7 +321,7 @@ HTML_PAGE = """<!DOCTYPE html>
 
     <!-- Footer Copyright -->
     <div style="text-align:center; padding:12px 0 20px 0; font-size:12px; color:var(--muted);">
-        © 2026 David Marica - AZS Gherla
+        © Biserica Adventista Gherla
     </div>
 </div>
 
@@ -330,8 +330,8 @@ HTML_PAGE = """<!DOCTYPE html>
     <div style="background:var(--surface); border:1px solid var(--border); border-radius:14px; width:90%; max-width:650px; max-height:85vh; display:flex; flex-direction:column; overflow:hidden; box-shadow:0 10px 30px rgba(0,0,0,0.5);">
         <div style="padding:16px 20px; border-bottom:1px solid var(--border); display:flex; justify-content:space-between; align-items:center;">
             <div>
-                <h2 style="font-size:18px; color:var(--accent);">YT AZS — V12.0</h2>
-                <div style="font-size:12px; color:var(--muted);">© 2026 David Marica - AZS Gherla</div>
+                <h2 style="font-size:18px; color:var(--accent);">YT AZS — V12.1</h2>
+                <div style="font-size:12px; color:var(--muted);">© Biserica Adventista Gherla</div>
             </div>
             <button class="btn" onclick="closeAboutModal()" style="font-size:16px; padding:4px 10px;">✕</button>
         </div>
@@ -364,7 +364,7 @@ HTML_PAGE = """<!DOCTYPE html>
             <div class="card" style="margin:0;">
                 <div class="card-title">Descriere & Compatibilitate</div>
                 <p style="color:var(--text); line-height:1.5;">
-                    YT AZS V12.0 este o aplicație modernă cross-platform (Windows & Linux) pentru descărcarea de conținut video și audio la calități de la 360p până la 4K/8K, MP3 320kbps, FLAC, compatibilă ProPresenter.
+                    YT AZS V12.1 este o aplicație modernă cross-platform (Windows & Linux) pentru descărcarea de conținut video și audio la calități de la 360p până la 4K/8K, MP3 320kbps, FLAC, compatibilă ProPresenter.
                 </p>
             </div>
         </div>
@@ -763,7 +763,7 @@ def start_server(port=5000):
     httpd = HTTPServer(server_address, RequestHandler)
     url = f"http://localhost:{port}"
     print("==================================================")
-    print(f"  YT-AZS V12.0 - Server Web pornit la: {url}")
+    print(f"  YT-AZS V12.1 - Server Web pornit la: {url}")
     print("  Apasă Ctrl+C pentru a opri.")
     print("==================================================")
     try:
