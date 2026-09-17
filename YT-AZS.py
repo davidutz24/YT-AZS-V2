@@ -41,35 +41,52 @@ try:
     def _patched_mouse_wheel_all(self, event):
         if not self.winfo_exists() or not self.winfo_ismapped():
             return
-        
-        try:
-            x_root = event.x_root if hasattr(event, 'x_root') and event.x_root else self.winfo_pointerx()
-            y_root = event.y_root if hasattr(event, 'y_root') and event.y_root else self.winfo_pointery()
-        except Exception:
-            x_root, y_root = 0, 0
 
-        # Check if cursor is over this canvas
-        try:
-            cx = self._parent_canvas.winfo_rootx()
-            cy = self._parent_canvas.winfo_rooty()
-            cw = self._parent_canvas.winfo_width()
-            ch = self._parent_canvas.winfo_height()
-            if not (cx <= x_root <= cx + cw and cy <= y_root <= cy + ch):
-                return
-        except Exception:
-            pass
+        widget = getattr(event, "widget", None)
+        # If hovering directly inside a CTkTextbox or Text widget, let that widget scroll itself
+        if widget is not None:
+            try:
+                w_class = str(widget.winfo_class()).lower()
+                if "text" in w_class or isinstance(widget, ctk.CTkTextbox):
+                    return
+                m = widget
+                while m is not None:
+                    if isinstance(m, ctk.CTkTextbox):
+                        return
+                    m = getattr(m, "master", None)
+            except Exception:
+                pass
 
-        # If hovering directly over a Textbox inside this frame, let the textbox scroll
-        try:
-            w = self.winfo_containing(x_root, y_root)
-            if w and (getattr(w, "widgetName", "") == "text" or "text" in str(w).lower()):
-                return
-        except Exception:
-            pass
+        # Primary check: Native widget hierarchy traversal (100% reliable across Wayland, X11, Win, Mac)
+        is_valid = False
+        if widget is not None:
+            try:
+                is_valid = self._check_if_valid_scroll(widget)
+            except Exception:
+                is_valid = False
+
+        # Fallback check: screen bounding box check
+        if not is_valid:
+            try:
+                x_root = event.x_root if hasattr(event, "x_root") and event.x_root else self.winfo_pointerx()
+                y_root = event.y_root if hasattr(event, "y_root") and event.y_root else self.winfo_pointery()
+                cx = self._parent_canvas.winfo_rootx()
+                cy = self._parent_canvas.winfo_rooty()
+                cw = self._parent_canvas.winfo_width()
+                ch = self._parent_canvas.winfo_height()
+                if cx <= x_root <= cx + cw and cy <= y_root <= cy + ch:
+                    is_valid = True
+            except Exception:
+                pass
+
+        if not is_valid:
+            return
 
         try:
+            num = getattr(event, "num", None)
+            delta = getattr(event, "delta", 0)
+
             if sys.platform.startswith("win"):
-                delta = getattr(event, "delta", 0)
                 if delta:
                     # Windows yscrollincrement is 1px per unit in CTk.
                     # Standard wheel notch is 120 -> scroll ~55px per notch for fast and fluid scrolling.
@@ -77,29 +94,46 @@ try:
                     if step == 0:
                         step = -1 if delta > 0 else 1
                     self._parent_canvas.yview_scroll(step, "units")
+                elif num == 4:
+                    self._parent_canvas.yview_scroll(-50, "units")
+                elif num == 5:
+                    self._parent_canvas.yview_scroll(50, "units")
             elif sys.platform == "darwin":
-                delta = getattr(event, "delta", 0)
                 if delta:
                     self._parent_canvas.yview_scroll(-int(delta * 2), "units")
-            else: # Linux
-                num = getattr(event, "num", None)
+                elif num == 4:
+                    self._parent_canvas.yview_scroll(-2, "units")
+                elif num == 5:
+                    self._parent_canvas.yview_scroll(2, "units")
+            else:  # Linux / Unix
                 if num == 4:
                     self._parent_canvas.yview_scroll(-2, "units")
                 elif num == 5:
                     self._parent_canvas.yview_scroll(2, "units")
-                elif hasattr(event, "delta") and event.delta:
-                    d = event.delta
-                    if abs(d) >= 120:
-                        step = -int(d / 40)
+                elif delta:
+                    if delta > 0:
+                        step = -max(1, int(abs(delta) / 60))
                     else:
-                        step = -int(d * 2)
-                    if step == 0:
-                        step = -1 if d > 0 else 1
+                        step = max(1, int(abs(delta) / 60))
                     self._parent_canvas.yview_scroll(step, "units")
         except Exception:
             pass
-            
+
     ctk.windows.widgets.ctk_scrollable_frame.CTkScrollableFrame._mouse_wheel_all = _patched_mouse_wheel_all
+
+    # Ensure both MouseWheel and Button-4/Button-5 events are always captured
+    _orig_sf_init = ctk.windows.widgets.ctk_scrollable_frame.CTkScrollableFrame.__init__
+    def _patched_sf_init(self, *args, **kwargs):
+        _orig_sf_init(self, *args, **kwargs)
+        try:
+            if sys.platform.startswith("win"):
+                self.bind_all("<Button-4>", self._mouse_wheel_all, add=True)
+                self.bind_all("<Button-5>", self._mouse_wheel_all, add=True)
+            elif "linux" in sys.platform:
+                self.bind_all("<MouseWheel>", self._mouse_wheel_all, add=True)
+        except Exception:
+            pass
+    ctk.windows.widgets.ctk_scrollable_frame.CTkScrollableFrame.__init__ = _patched_sf_init
     # ----------------------------------------------------------------------------
 except ImportError:
     ctk = None

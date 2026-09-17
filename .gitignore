@@ -13,6 +13,7 @@ downloads/
 *.egg-info/
 *.egg
 *.spec
+*.desktop
 
 # Installer output
 installer/
