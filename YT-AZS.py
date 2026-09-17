@@ -71,21 +71,31 @@ try:
             if sys.platform.startswith("win"):
                 delta = getattr(event, "delta", 0)
                 if delta:
-                    step = -int(delta / 40)
-                    if step != 0:
-                        self._parent_canvas.yview_scroll(step, "units")
+                    # Windows yscrollincrement is 1px per unit in CTk.
+                    # Standard wheel notch is 120 -> scroll ~55px per notch for fast and fluid scrolling.
+                    step = -int(delta / 2.2)
+                    if step == 0:
+                        step = -1 if delta > 0 else 1
+                    self._parent_canvas.yview_scroll(step, "units")
             elif sys.platform == "darwin":
                 delta = getattr(event, "delta", 0)
                 if delta:
-                    self._parent_canvas.yview_scroll(-int(delta), "units")
-            else:
+                    self._parent_canvas.yview_scroll(-int(delta * 2), "units")
+            else: # Linux
                 num = getattr(event, "num", None)
                 if num == 4:
-                    self._parent_canvas.yview_scroll(-3, "units")
+                    self._parent_canvas.yview_scroll(-2, "units")
                 elif num == 5:
-                    self._parent_canvas.yview_scroll(3, "units")
+                    self._parent_canvas.yview_scroll(2, "units")
                 elif hasattr(event, "delta") and event.delta:
-                    self._parent_canvas.yview_scroll(-int(event.delta / 40), "units")
+                    d = event.delta
+                    if abs(d) >= 120:
+                        step = -int(d / 40)
+                    else:
+                        step = -int(d * 2)
+                    if step == 0:
+                        step = -1 if d > 0 else 1
+                    self._parent_canvas.yview_scroll(step, "units")
         except Exception:
             pass
             
